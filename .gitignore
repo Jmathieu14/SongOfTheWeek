@@ -1,1 +1,5 @@
+# frameworks
 node_modules
+
+# IDE's
+/.vscode
