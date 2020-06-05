@@ -1,0 +1,28 @@
+{
+  "name": "songoftheweek",
+  "version": "1.0.0",
+  "description": "Web project to display the song of the week based on the most recent song added to the specified soundcloud playlist",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jmathieu14/SongOfTheWeek.git"
+  },
+  "keywords": [
+    "music",
+    "soundcloud",
+    "react",
+    "typescript"
+  ],
+  "author": "Jacques Mathieu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Jmathieu14/SongOfTheWeek/issues"
+  },
+  "homepage": "https://github.com/Jmathieu14/SongOfTheWeek#readme",
+  "devDependencies": {
+    "create-react-app": "^3.4.1"
+  }
+}
