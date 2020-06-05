@@ -1,7 +1,7 @@
 import React from 'react';
 import './SongOfTheWeek.css';
 import songOfTheWeekConfig from '../../config/SongOfTheWeekConfig';
-var SC = require('soundcloud-widget')
+var SoundcloudWidget = require('soundcloud-widget')
 
 
 class SongOfTheWeek extends React.Component {
@@ -13,19 +13,18 @@ class SongOfTheWeek extends React.Component {
         super(props);
     }
 
-    saveSoundsToVariable(response: any) {
-        this.mySounds = response;
-        console.log(this.mySounds);
-    }
-
     loadSoundsFromWidget() {
-        this.soundcloudWidget.getSounds(this.saveSoundsToVariable);
+        this.soundcloudWidget.getSounds().then((result: {}) => {
+            this.mySounds = result;
+            console.log(this.mySounds);
+        })
     }
 
     componentDidMount() {
-        // this.iframe = document.querySelector('iframe');
-        // this.soundcloudWidget = SC.Widget(this.iframe);
-        // this.loadSoundsFromWidget();
+        this.iframe = document.querySelector('iframe');
+        console.log(this.iframe);
+        this.soundcloudWidget = new SoundcloudWidget(this.iframe);
+        this.loadSoundsFromWidget();
     }
 
     render() {
