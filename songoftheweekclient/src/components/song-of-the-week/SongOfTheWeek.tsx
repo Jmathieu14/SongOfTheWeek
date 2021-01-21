@@ -11,9 +11,11 @@ class SongOfTheWeek extends React.Component {
 
     constructor(props: any) {
         super(props);
+        this.loadSoundsFromWidget = this.loadSoundsFromWidget.bind(this);
     }
 
     loadSoundsFromWidget() {
+        console.log('here are my sounds');
         this.soundcloudWidget.getSounds().then((result: {}) => {
             this.mySounds = result;
             console.log(this.mySounds);
@@ -30,15 +32,16 @@ class SongOfTheWeek extends React.Component {
     render() {
         return (
             <div className="song-of-the-week">
-                <iframe width="75%" height="300" scrolling="no" allow="autoplay"
+                <iframe title="song-of-the-week-playlist" id="soundcloud-playlist" width="75%" height="300" scrolling="no" allow="autoplay"
                     src={songOfTheWeekConfig.playlist_request.url}>
                 </iframe>
                 <div className="soundcloud-embedded-playlist">
-                    <a className="title" href="https://soundcloud.com/spltpersonalty" title="Spl!t Personal!ty" target="_blank">Spl!t Personal!ty</a>
+                    <a className="title" href="https://soundcloud.com/spltpersonalty" title="Spl!t Personal!ty" target="_blank" rel="noopener noreferrer">Spl!t Personal!ty</a>
                      ·
-                    <a className="title" href={songOfTheWeekConfig.playlist_url} title="AL1EN 1NVAZ!0N - Sponsored by Tear Out Dubstep" target="_blank">
+                    <a className="title" href={songOfTheWeekConfig.playlist_url} title="AL1EN 1NVAZ!0N - Sponsored by Tear Out Dubstep" target="_blank" rel="noopener noreferrer">
                         AL1EN 1NVAZ!0N - Sponsored by Tear Out Dubstep</a>
                 </div>
+                <button onClick={this.loadSoundsFromWidget}>Load Sounds From Widget</button>
             </div>
         );
     }
