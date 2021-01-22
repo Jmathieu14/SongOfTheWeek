@@ -6,27 +6,40 @@ var SoundcloudWidget = require('soundcloud-widget')
 
 class SongOfTheWeek extends React.Component {
     iframe: HTMLIFrameElement | null | undefined;
-    soundcloudWidget: any;
-    mySounds = {};
+    soundcloudWidget: any = null;
+    mySounds = [];
+    DELAY = 2250;
 
     constructor(props: any) {
         super(props);
         this.loadSoundsFromWidget = this.loadSoundsFromWidget.bind(this);
+        this.skipToLastSong = this.skipToLastSong.bind(this);
     }
 
-    loadSoundsFromWidget() {
-        console.log('here are my sounds');
-        this.soundcloudWidget.getSounds().then((result: {}) => {
+    delaySkipToLastSong() {
+        setTimeout(() => {
+            this.loadSoundsFromWidget(this.skipToLastSong)
+        }, this.DELAY);
+    }
+
+    loadSoundsFromWidget(_callback: any) {
+        this.soundcloudWidget.getSounds().then((result: []) => {
             this.mySounds = result;
-            console.log(this.mySounds);
+            _callback();
         })
+    }
+
+    skipToLastSong() {
+        if (this.mySounds !== [] && !!this.soundcloudWidget) {
+            this.soundcloudWidget.skip(this.mySounds.length - 1);
+            this.soundcloudWidget.pause();
+        }
     }
 
     componentDidMount() {
         this.iframe = document.querySelector('iframe');
-        console.log(this.iframe);
         this.soundcloudWidget = new SoundcloudWidget(this.iframe);
-        this.loadSoundsFromWidget();
+        this.delaySkipToLastSong();
     }
 
     render() {
@@ -41,7 +54,6 @@ class SongOfTheWeek extends React.Component {
                     <a className="title" href={songOfTheWeekConfig.playlist_url} title="AL1EN 1NVAZ!0N - Sponsored by Tear Out Dubstep" target="_blank" rel="noopener noreferrer">
                         AL1EN 1NVAZ!0N - Sponsored by Tear Out Dubstep</a>
                 </div>
-                <button onClick={this.loadSoundsFromWidget}>Load Sounds From Widget</button>
             </div>
         );
     }
