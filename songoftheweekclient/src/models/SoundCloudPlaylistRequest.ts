@@ -1,5 +1,6 @@
 class SoundCloudPlaylistRequest {
     url: string;
+    playlist_id: string | null | undefined;
     constructor() {
         this.url = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/{playlistId}\
         &color=%23ff5500\
@@ -14,6 +15,7 @@ class SoundCloudPlaylistRequest {
     }
 
     setPlaylistId(playlistId: string) {
+        this.playlist_id = playlistId;
         this.url = this.url.replace("{playlistId}", playlistId);
         console.log(this.url);
         return this;
