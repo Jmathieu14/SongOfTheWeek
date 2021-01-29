@@ -8,12 +8,13 @@ class SongOfTheWeek extends React.Component {
     iframe: HTMLIFrameElement | null | undefined;
     soundcloudWidget: any = null;
     mySounds = [];
-    DELAY = 2250;
+    DELAY = 2500;
 
     constructor(props: any) {
         super(props);
         this.loadSoundsFromWidget = this.loadSoundsFromWidget.bind(this);
         this.skipToLastSong = this.skipToLastSong.bind(this);
+        this.playLatestSong = this.playLatestSong.bind(this);
     }
 
     delaySkipToLastSong() {
@@ -36,6 +37,11 @@ class SongOfTheWeek extends React.Component {
         }
     }
 
+    playLatestSong() {
+        this.skipToLastSong();
+        this.soundcloudWidget.play();
+    }
+
     componentDidMount() {
         this.iframe = document.querySelector('iframe');
         this.soundcloudWidget = new SoundcloudWidget(this.iframe);
@@ -45,14 +51,18 @@ class SongOfTheWeek extends React.Component {
     render() {
         return (
             <div className="song-of-the-week">
-                <iframe title="song-of-the-week-playlist" id="soundcloud-playlist" width="75%" height="300" scrolling="no" allow="autoplay"
+                <div className="play-latest">
+                    <button className="btn btn-primary"
+                        onClick={this.playLatestSong}>Play the Latest Song of the Week!</button>
+                </div>
+                <iframe title="song-of-the-week-playlist" className="soundcloud-playlist" width="100%" height="300" scrolling="no" allow="autoplay"
                     src={songOfTheWeekConfig.playlist_request.url}>
                 </iframe>
                 <div className="soundcloud-embedded-playlist">
-                    <a className="title" href="https://soundcloud.com/spltpersonalty" title="Spl!t Personal!ty" target="_blank" rel="noopener noreferrer">Spl!t Personal!ty</a>
+                    <a className="title" href={songOfTheWeekConfig.playlist_creator_url} title={songOfTheWeekConfig.playlist_creator_aria} target="_blank" rel="noopener noreferrer">Spl!t Personal!ty</a>
                      ·
-                    <a className="title" href={songOfTheWeekConfig.playlist_url} title="AL1EN 1NVAZ!0N - Sponsored by Tear Out Dubstep" target="_blank" rel="noopener noreferrer">
-                        AL1EN 1NVAZ!0N - Sponsored by Tear Out Dubstep</a>
+                    <a className="title" href={songOfTheWeekConfig.playlist_url} title={songOfTheWeekConfig.playlist_name} target="_blank" rel="noopener noreferrer">
+                        {songOfTheWeekConfig.playlist_name}</a>
                 </div>
             </div>
         );

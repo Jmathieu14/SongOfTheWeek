@@ -1,4 +1,16 @@
-.soundcloud-embedded-playlist {
+.song-of-the-week {
+    position: relative;
+    float: left;
+    margin: auto;
+    width: 50%;
+    top: 5vh;
+}
+
+.song-of-the-week .play-latest button {
+    margin-bottom: 1em;
+}
+
+.song-of-the-week .soundcloud-embedded-playlist {
     font-size: 10px;
     color: #cccccc;
     line-break: anywhere;
@@ -10,14 +22,11 @@
     font-weight: 100;
 }
 
-.soundcloud-embedded-playlist .title {
+.song-of-the-week .soundcloud-embedded-playlist .title {
     color: #cccccc;
     text-decoration: none;
 }
 
-.song-of-the-week {
-    position: relative;
-    float: left;
-    left: 0px;
-    width: 100%;
+.song-of-the-week iframe.soundcloud-playlist {
+    border: none;
 }
