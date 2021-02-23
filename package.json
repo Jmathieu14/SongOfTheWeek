@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/Jmathieu14/SongOfTheWeek#readme",
   "devDependencies": {
-    "create-react-app": "^4.0.1"
+    "create-react-app": "^4.0.3"
   }
 }
